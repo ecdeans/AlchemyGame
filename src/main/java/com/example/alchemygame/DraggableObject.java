@@ -3,6 +3,8 @@ package com.example.alchemygame;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 
+// Test comment
+
 public class DraggableObject {
     private double mouseX;
     private double mouseY;
