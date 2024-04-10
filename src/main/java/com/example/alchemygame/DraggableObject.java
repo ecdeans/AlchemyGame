@@ -2,6 +2,7 @@ package com.example.alchemygame;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 
 // Test comment
 
@@ -22,15 +23,15 @@ public class DraggableObject {
 
         node.setOnMousePressed(mouseEvent -> {
             //System.out.print(startingPoint);
-            mouseX = mouseEvent.getX();
-            mouseY = mouseEvent.getY();
+            mouseX = mouseEvent.getSceneX() - node.getTranslateX();
+            mouseY = mouseEvent.getSceneY() - node.getTranslateY();
             //System.out.print(mouseEvent.getSceneX() + " " + mouseEvent.getSceneX() + "\n");
         });
 
         node.setOnMouseDragged(mouseEvent -> {
             //System.out.println(mouseEvent.getSceneX());
-            node.setLayoutX(mouseEvent.getSceneX() - mouseX);
-            node.setLayoutY(mouseEvent.getSceneY() - mouseY);
+            node.setTranslateX(mouseEvent.getSceneX() - mouseX);
+            node.setTranslateY(mouseEvent.getSceneY() - mouseY);
             //System.out.print(mouseEvent.getSceneX() + " " + mouseEvent.getSceneX() + "\n");
         });
     }
