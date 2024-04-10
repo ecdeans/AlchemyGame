@@ -28,7 +28,7 @@ public class DraggableObject {
         });
 
         node.setOnMouseDragged(mouseEvent -> {
-            System.out.println(mouseEvent.getSceneX());
+            //System.out.println(mouseEvent.getSceneX());
             node.setLayoutX(mouseEvent.getSceneX() - mouseX);
             node.setLayoutY(mouseEvent.getSceneY() - mouseY);
             //System.out.print(mouseEvent.getSceneX() + " " + mouseEvent.getSceneX() + "\n");
