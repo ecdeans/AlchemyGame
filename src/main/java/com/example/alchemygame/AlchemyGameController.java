@@ -37,23 +37,16 @@ public class AlchemyGameController {
     @FXML
     private ScrollBar elementsScrollBar;
 
-    DraggableObject draggableObjectPane1 = new DraggableObject();
-    DraggableObject draggableObjectPane2 = new DraggableObject();
+    DraggableObject draggableObjectPane = new DraggableObject();
 
     public void initialize() {
         //System.out.print("hi");
-        draggableObjectPane1.makeDraggable(elementDemo21);
-        draggableObjectPane1.makeDraggable(elementDemo2);
-        draggableObjectPane1.makeDraggable(elementDemo22);
-        draggableObjectPane1.makeDraggable(elementDemo23);
-        draggableObjectPane1.makeDraggable(elementDemo24);
-        draggableObjectPane1.makeDraggable(elementDemo25);
+        draggableObjectPane.makeDraggable(elementDemo21);
+        draggableObjectPane.makeDraggable(elementDemo2);
+        draggableObjectPane.makeDraggable(elementDemo22);
+        draggableObjectPane.makeDraggable(elementDemo23);
+        draggableObjectPane.makeDraggable(elementDemo24);
+        draggableObjectPane.makeDraggable(elementDemo25);
 
-        draggableObjectPane2.makeDraggable(elementDemo21);
-        draggableObjectPane2.makeDraggable(elementDemo2);
-        draggableObjectPane2.makeDraggable(elementDemo22);
-        draggableObjectPane2.makeDraggable(elementDemo23);
-        draggableObjectPane2.makeDraggable(elementDemo24);
-        draggableObjectPane2.makeDraggable(elementDemo25);
     }
 }
