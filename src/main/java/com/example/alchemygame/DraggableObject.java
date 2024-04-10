@@ -5,6 +5,8 @@ import javafx.scene.Node;
 
 // Test comment
 
+// Check check
+
 public class DraggableObject {
     private double mouseX;
     private double mouseY;
@@ -26,7 +28,7 @@ public class DraggableObject {
         });
 
         node.setOnMouseDragged(mouseEvent -> {
-            System.out.println(mouseEvent.getSceneX());
+            //System.out.println(mouseEvent.getSceneX());
             node.setLayoutX(mouseEvent.getSceneX() - mouseX);
             node.setLayoutY(mouseEvent.getSceneY() - mouseY);
             //System.out.print(mouseEvent.getSceneX() + " " + mouseEvent.getSceneX() + "\n");

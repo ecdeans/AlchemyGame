@@ -5,11 +5,12 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="100.0" minWidth="100.0" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.alchemygame.AlchemyGameController">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="100.0" minWidth="100.0" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group9projectalchemy.AlchemyGameController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="400.0" prefWidth="400.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="295.0" prefWidth="295.0" />
@@ -31,6 +32,6 @@
             <Rectangle fx:id="elementDemo25" arcHeight="5.0" arcWidth="5.0" height="64.0" layoutX="170.0" layoutY="250.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="64.0" />
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <FlowPane prefHeight="200.0" prefWidth="200.0" />
    </children>
 </GridPane>
