@@ -8,12 +8,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class ClickableObject {
+
     // Variables
     private double mouseX;
     private double mouseY;
+
     // Others
-    FXMLLoader loader = new FXMLLoader();
-    ImageView newImageView = new ImageView();
     DraggableObject draggableObject = new DraggableObject();
 
     public void makeClickable(ImageView clickableObj, AnchorPane spawnScene) {
