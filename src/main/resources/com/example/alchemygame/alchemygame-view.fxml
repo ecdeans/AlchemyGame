@@ -6,31 +6,41 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="100.0" minWidth="100.0" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.alchemygame.AlchemyGameController">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="100.0" minWidth="100.0" prefHeight="450.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.alchemygame.AlchemyGameController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="400.0" prefWidth="400.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="295.0" prefWidth="295.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
   </columnConstraints>
   <rowConstraints>
+      <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" prefHeight="500.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ScrollBar fx:id="elementsScrollBar" minWidth="20.0" orientation="VERTICAL" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-      <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" />
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-         <children>
-            <Rectangle fx:id="elementDemo2" arcHeight="5.0" arcWidth="5.0" fill="#5aae75" height="64.0" layoutX="41.0" layoutY="48.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="64.0" />
-            <Rectangle fx:id="elementDemo21" arcHeight="5.0" arcWidth="5.0" fill="#cf1818" height="64.0" layoutX="170.0" layoutY="48.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="64.0" />
-            <Label layoutX="122.0" layoutY="14.0" maxWidth="1.7976931348623157E308" text="Elements" />
-            <Rectangle fx:id="elementDemo22" arcHeight="5.0" arcWidth="5.0" fill="#856cd9" height="64.0" layoutX="41.0" layoutY="154.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="64.0" />
-            <Rectangle fx:id="elementDemo23" arcHeight="5.0" arcWidth="5.0" fill="#edff4f" height="64.0" layoutX="170.0" layoutY="154.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="64.0" />
-            <Rectangle fx:id="elementDemo24" arcHeight="5.0" arcWidth="5.0" fill="#27dae7" height="64.0" layoutX="41.0" layoutY="250.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="64.0" />
-            <Rectangle fx:id="elementDemo25" arcHeight="5.0" arcWidth="5.0" height="64.0" layoutX="170.0" layoutY="250.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="64.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <ScrollBar fx:id="elementsScrollBar" orientation="VERTICAL" prefHeight="420.0" prefWidth="25.0" visibleAmount="10.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+      <Rectangle fx:id="elementDemo2" arcHeight="5.0" arcWidth="5.0" fill="#5aae75" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" translateX="25.0" translateY="275.0" width="100.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <Rectangle fx:id="elementDemo21" arcHeight="5.0" arcWidth="5.0" fill="#cf1818" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" translateX="150.0" translateY="150.0" width="100.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <Rectangle fx:id="elementDemo22" arcHeight="5.0" arcWidth="5.0" fill="#856cd9" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" translateX="150.0" translateY="275.0" width="100.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <Rectangle fx:id="elementDemo23" arcHeight="5.0" arcWidth="5.0" fill="#edff4f" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" translateX="25.0" translateY="150.0" width="100.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <Rectangle fx:id="elementDemo24" arcHeight="5.0" arcWidth="5.0" fill="#27dae7" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" translateX="150.0" translateY="25.0" width="100.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <Rectangle fx:id="elementDemo25" arcHeight="5.0" arcWidth="5.0" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" translateX="25.0" translateY="25.0" width="100.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <AnchorPane fx:id="mainSceneAnchorPlane" prefHeight="200.0" prefWidth="600.0" GridPane.rowIndex="1" />
+      <Region prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #C5C5C5;" />
+      <Label text="Next Target: [PLACEHOLDER]" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Region prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #C5C5C5;" GridPane.columnIndex="1" />
+      <Label text="Elements" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </GridPane>

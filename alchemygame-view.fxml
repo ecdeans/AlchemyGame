@@ -23,7 +23,6 @@
       <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" />
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
          <children>
-            <Rectangle fx:id="elementDemo2" arcHeight="5.0" arcWidth="5.0" fill="#5aae75" height="64.0" layoutX="41.0" layoutY="48.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="64.0" />
             <Rectangle fx:id="elementDemo21" arcHeight="5.0" arcWidth="5.0" fill="#cf1818" height="64.0" layoutX="170.0" layoutY="48.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="64.0" />
             <Label layoutX="122.0" layoutY="14.0" maxWidth="1.7976931348623157E308" text="Elements" />
             <Rectangle fx:id="elementDemo22" arcHeight="5.0" arcWidth="5.0" fill="#856cd9" height="64.0" layoutX="41.0" layoutY="154.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="64.0" />
@@ -32,6 +31,9 @@
             <Rectangle fx:id="elementDemo25" arcHeight="5.0" arcWidth="5.0" height="64.0" layoutX="170.0" layoutY="250.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="64.0" />
          </children>
       </AnchorPane>
-      <FlowPane prefHeight="200.0" prefWidth="200.0" />
+      <FlowPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Rectangle fx:id="elementDemo2" arcHeight="5.0" arcWidth="5.0" fill="#5aae75" height="64.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="64.0" />
+         </children></FlowPane>
    </children>
 </GridPane>

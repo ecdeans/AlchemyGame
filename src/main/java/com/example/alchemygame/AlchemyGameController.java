@@ -9,12 +9,16 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class AlchemyGameController {
+
+    @FXML
+    private AnchorPane mainSceneAnchorPlane;
 
     @FXML
     private Rectangle elementDemo2;
@@ -37,16 +41,16 @@ public class AlchemyGameController {
     @FXML
     private ScrollBar elementsScrollBar;
 
-    DraggableObject draggableObjectPane = new DraggableObject();
+    DraggableObject draggableObject = new DraggableObject();
+    ClickableObject clickableObject = new ClickableObject();
 
     public void initialize() {
         //System.out.print("hi");
-        draggableObjectPane.makeDraggable(elementDemo21);
-        draggableObjectPane.makeDraggable(elementDemo2);
-        draggableObjectPane.makeDraggable(elementDemo22);
-        draggableObjectPane.makeDraggable(elementDemo23);
-        draggableObjectPane.makeDraggable(elementDemo24);
-        draggableObjectPane.makeDraggable(elementDemo25);
-
+        clickableObject.makeClickable(elementDemo22, mainSceneAnchorPlane);
+        clickableObject.makeClickable(elementDemo21, mainSceneAnchorPlane);
+        clickableObject.makeClickable(elementDemo2, mainSceneAnchorPlane);
+        clickableObject.makeClickable(elementDemo23, mainSceneAnchorPlane);
+        clickableObject.makeClickable(elementDemo24, mainSceneAnchorPlane);
+        clickableObject.makeClickable(elementDemo25, mainSceneAnchorPlane);
     }
 }
