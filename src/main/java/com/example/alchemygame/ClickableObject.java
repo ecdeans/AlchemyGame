@@ -34,25 +34,4 @@ public class ClickableObject {
             spawnScene.getChildren().add(newImageView);
         });
     }
-//    public void makeClickable(Rectangle clickableObj, AnchorPane spawnScene){
-//
-//        //startingPoint = node.localToScene(0,0);
-//
-//        clickableObj.setOnMousePressed(mouseEvent -> {
-//            System.out.print("spawn object");
-//            // Get mouse position
-//            mouseX = mouseEvent.getSceneX() - 50;
-//            mouseY = mouseEvent.getSceneY() - 30 - 50;
-//
-//            // Make the new rectangle
-//            Rectangle newRectangle = new Rectangle(mouseX,mouseY,100,100);
-//            newRectangle.setFill(clickableObj.getFill()); // Gets the color of the node clicked on                  !!!!!!!!!!NEEDS TO BE REPLACED WITH IMAGE!!!!!!!!!
-//            draggableObject.makeDraggable(newRectangle);
-//            //draggableObject.makeDraggable(newRectangle);
-//
-//            // Add the new rectangle to the grid
-//            spawnScene.getChildren().add(newRectangle);
-//
-//            //System.out.print(mouseEvent.getSceneX() + " " + mouseEvent.getSceneX() + "\n");
-//        });
 }
