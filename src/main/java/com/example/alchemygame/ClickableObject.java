@@ -24,7 +24,7 @@ public class ClickableObject {
             mouseY = mouseEvent.getSceneY() - 30 - 50;
 
             // Gets image and sets the ImageView obj
-            newImageView.setImage(clickableObj.getImage());
+            ImageView newImageView = new ImageView(clickableObj.getImage());
             newImageView.setLayoutX(mouseX);
             newImageView.setLayoutY(mouseY);
 
