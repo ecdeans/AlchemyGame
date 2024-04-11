@@ -23,11 +23,12 @@ public class ClickableObject {
             mouseX = mouseEvent.getSceneX() - 50;
             mouseY = mouseEvent.getSceneY() - 30 - 50;
 
-            // Gets image and sets the ImageView obj
+            // Make new movable image
             ImageView newImageView = new ImageView(clickableObj.getImage());
             newImageView.setLayoutX(mouseX);
             newImageView.setLayoutY(mouseY);
 
+            // Make object draggable
             draggableObject.makeDraggable(newImageView);
 
             // Add new element to grid
