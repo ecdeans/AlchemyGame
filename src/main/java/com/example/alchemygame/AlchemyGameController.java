@@ -52,5 +52,6 @@ public class AlchemyGameController {
         clickableObject.makeClickable(elementDemo23, mainSceneAnchorPlane);
         clickableObject.makeClickable(elementDemo24, mainSceneAnchorPlane);
         clickableObject.makeClickable(elementDemo25, mainSceneAnchorPlane);
+
     }
 }
