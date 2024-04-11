@@ -1,19 +1,13 @@
 package com.example.alchemygame;
 
-// Can you see this??? NO LOL
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import javafx.scene.image.ImageView;
 
 public class AlchemyGameController {
 
@@ -21,37 +15,53 @@ public class AlchemyGameController {
     private AnchorPane mainSceneAnchorPlane;
 
     @FXML
-    private Rectangle elementDemo2;
+    private ImageView elementDemo2;
 
     @FXML
-    private Rectangle elementDemo21;
+    private ImageView elementDemo21;
 
     @FXML
-    private Rectangle elementDemo22;
+    private ImageView elementDemo22;
 
     @FXML
-    private Rectangle elementDemo23;
+    private ImageView elementDemo23;
 
     @FXML
-    private Rectangle elementDemo24;
+    private ImageView elementDemo24;
 
     @FXML
-    private Rectangle elementDemo25;
+    private ImageView elementDemo25;
 
     @FXML
     private ScrollBar elementsScrollBar;
 
-    DraggableObject draggableObject = new DraggableObject();
     ClickableObject clickableObject = new ClickableObject();
 
     public void initialize() {
-        //System.out.print("hi");
-        clickableObject.makeClickable(elementDemo22, mainSceneAnchorPlane);
-        clickableObject.makeClickable(elementDemo21, mainSceneAnchorPlane);
-        clickableObject.makeClickable(elementDemo2, mainSceneAnchorPlane);
-        clickableObject.makeClickable(elementDemo23, mainSceneAnchorPlane);
-        clickableObject.makeClickable(elementDemo24, mainSceneAnchorPlane);
-        clickableObject.makeClickable(elementDemo25, mainSceneAnchorPlane);
+
+            Image imageEarth = new Image(getClass().getResourceAsStream("/ART/earth.jpg"));
+            elementDemo2.setImage(imageEarth);
+            clickableObject.makeClickable(elementDemo2, mainSceneAnchorPlane);
+
+            Image imageAir = new Image(getClass().getResourceAsStream("/ART/air.jpg"));
+            elementDemo22.setImage(imageAir);
+            clickableObject.makeClickable(elementDemo22, mainSceneAnchorPlane);
+
+            Image imageWater = new Image(getClass().getResourceAsStream("/ART/water.jpg"));
+            elementDemo21.setImage(imageWater);
+            clickableObject.makeClickable(elementDemo21, mainSceneAnchorPlane);
+
+            Image imageFire = new Image(getClass().getResourceAsStream("/ART/fire.jpg"));
+            elementDemo23.setImage(imageFire);
+            clickableObject.makeClickable(elementDemo23, mainSceneAnchorPlane);
+
+            Image imageStone = new Image(getClass().getResourceAsStream("/ART/stone.jpg"));
+            elementDemo24.setImage(imageStone);
+            clickableObject.makeClickable(elementDemo24, mainSceneAnchorPlane);
+
+            Image imageTree = new Image(getClass().getResourceAsStream("/ART/tree.jpg"));
+            elementDemo25.setImage(imageTree);
+            clickableObject.makeClickable(elementDemo25, mainSceneAnchorPlane);
 
     }
 }

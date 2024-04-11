@@ -5,7 +5,6 @@ import javafx.scene.Node;
 
 // Test comment
 
-// Check check
 
 public class DraggableObject {
     private double mouseX;
