@@ -40,9 +40,9 @@ public class AlchemyGameController {
     public void initialize() {
 
             // Creates elements and fetches image
-
             Image imageEarth = new Image(getClass().getResourceAsStream("/ART/earth.jpg"));
             elementDemo2.setImage(imageEarth);
+            // Makes clickable and draggable in the main Anchor Plane
             clickableObject.makeClickable(elementDemo2, mainSceneAnchorPlane);
 
             Image imageAir = new Image(getClass().getResourceAsStream("/ART/air.jpg"));
