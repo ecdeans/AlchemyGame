@@ -9,7 +9,6 @@ public class Element {
     private final String elementName;
     private final ImageView elementImageView;
 
-
     ClickableObject clickableObj = new ClickableObject();
 
     // Constructor
