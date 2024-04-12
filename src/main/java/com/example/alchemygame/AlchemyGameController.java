@@ -37,6 +37,8 @@ public class AlchemyGameController {
     // Added this anticipating it might be used to handle collisions
     private ColumnConstraints mixingPanel;
 
+
+
     public void initialize() {
 
             Element fire = new Element("fire", elementDemo2, mainSceneAnchorPlane);
@@ -45,6 +47,8 @@ public class AlchemyGameController {
             Element air = new Element("air", elementDemo23, mainSceneAnchorPlane);
             Element tree = new Element("tree", elementDemo24, mainSceneAnchorPlane);
             Element stone = new Element("stone", elementDemo25, mainSceneAnchorPlane);
+
+
 
     }
 
