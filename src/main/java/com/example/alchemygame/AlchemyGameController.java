@@ -1,18 +1,16 @@
 package com.example.alchemygame;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 
 public class AlchemyGameController {
 
     @FXML
-    private AnchorPane mainSceneAnchorPlane;
+    public AnchorPane mainSceneAnchorPlane;
 
     @FXML
     private ImageView elementDemo2;
@@ -35,35 +33,19 @@ public class AlchemyGameController {
     @FXML
     private ScrollBar elementsScrollBar;
 
-    ClickableObject clickableObject = new ClickableObject();
+    @FXML
+    // Added this anticipating it might be used to handle collisions
+    private ColumnConstraints mixingPanel;
 
     public void initialize() {
 
-            // Creates elements and fetches image
-            Image imageEarth = new Image(getClass().getResourceAsStream("/ART/earth.jpg"));
-            elementDemo2.setImage(imageEarth);
-            // Makes clickable and draggable in the main Anchor Plane
-            clickableObject.makeClickable(elementDemo2, mainSceneAnchorPlane);
-
-            Image imageAir = new Image(getClass().getResourceAsStream("/ART/air.jpg"));
-            elementDemo22.setImage(imageAir);
-            clickableObject.makeClickable(elementDemo22, mainSceneAnchorPlane);
-
-            Image imageWater = new Image(getClass().getResourceAsStream("/ART/water.jpg"));
-            elementDemo21.setImage(imageWater);
-            clickableObject.makeClickable(elementDemo21, mainSceneAnchorPlane);
-
-            Image imageFire = new Image(getClass().getResourceAsStream("/ART/fire.jpg"));
-            elementDemo23.setImage(imageFire);
-            clickableObject.makeClickable(elementDemo23, mainSceneAnchorPlane);
-
-            Image imageStone = new Image(getClass().getResourceAsStream("/ART/stone.jpg"));
-            elementDemo24.setImage(imageStone);
-            clickableObject.makeClickable(elementDemo24, mainSceneAnchorPlane);
-
-            Image imageTree = new Image(getClass().getResourceAsStream("/ART/tree.jpg"));
-            elementDemo25.setImage(imageTree);
-            clickableObject.makeClickable(elementDemo25, mainSceneAnchorPlane);
+            Element fire = new Element("fire", elementDemo2, mainSceneAnchorPlane);
+            Element water = new Element("water", elementDemo21, mainSceneAnchorPlane);
+            Element earth = new Element("earth", elementDemo22, mainSceneAnchorPlane);
+            Element air = new Element("air", elementDemo23, mainSceneAnchorPlane);
+            Element tree = new Element("tree", elementDemo24, mainSceneAnchorPlane);
+            Element stone = new Element("stone", elementDemo25, mainSceneAnchorPlane);
 
     }
+
 }
