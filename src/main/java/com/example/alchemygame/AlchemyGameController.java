@@ -1,51 +1,51 @@
 package com.example.alchemygame;
 
-// Can you see this??? NO LOL
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
-import javafx.scene.shape.Rectangle;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 
 public class AlchemyGameController {
 
     @FXML
-    private Rectangle elementDemo2;
+    public AnchorPane mainSceneAnchorPlane;
 
     @FXML
-    private Rectangle elementDemo21;
+    private ImageView elementDemo2;
 
     @FXML
-    private Rectangle elementDemo22;
+    private ImageView elementDemo21;
 
     @FXML
-    private Rectangle elementDemo23;
+    private ImageView elementDemo22;
 
     @FXML
-    private Rectangle elementDemo24;
+    private ImageView elementDemo23;
 
     @FXML
-    private Rectangle elementDemo25;
+    private ImageView elementDemo24;
+
+    @FXML
+    private ImageView elementDemo25;
 
     @FXML
     private ScrollBar elementsScrollBar;
 
-    DraggableObject draggableObject = new DraggableObject();
+    @FXML
+    // Added this anticipating it might be used to handle collisions
+    private ColumnConstraints mixingPanel;
 
     public void initialize() {
-        //System.out.print("hi");
-        draggableObject.makeDraggable(elementDemo21);
-        draggableObject.makeDraggable(elementDemo2);
-        draggableObject.makeDraggable(elementDemo22);
-        draggableObject.makeDraggable(elementDemo23);
-        draggableObject.makeDraggable(elementDemo24);
-        draggableObject.makeDraggable(elementDemo25);
+
+            Element fire = new Element("fire", elementDemo2, mainSceneAnchorPlane);
+            Element water = new Element("water", elementDemo21, mainSceneAnchorPlane);
+            Element earth = new Element("earth", elementDemo22, mainSceneAnchorPlane);
+            Element air = new Element("air", elementDemo23, mainSceneAnchorPlane);
+            Element tree = new Element("tree", elementDemo24, mainSceneAnchorPlane);
+            Element stone = new Element("stone", elementDemo25, mainSceneAnchorPlane);
+
     }
+
 }
