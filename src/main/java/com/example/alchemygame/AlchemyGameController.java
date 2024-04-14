@@ -126,7 +126,7 @@ public class AlchemyGameController {
                 // add it to array and scene, and enable dragging element
                 CombinePane.getChildren().add(newelement);
                 elements.add(newelement);
-                System.out.println(elements);
+                //System.out.println(elements);
                 enableDrag(newelement);
             }
         });
