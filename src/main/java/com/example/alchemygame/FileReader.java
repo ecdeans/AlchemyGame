@@ -11,6 +11,8 @@ public class FileReader {
         return readCSV(filePath);
     }
 
+
+    // store in format [[(tuple combining elements), result], ...]
    public static String[][] readCSV(String filePath) {
         List<String[]> rows = new ArrayList<>();
 
