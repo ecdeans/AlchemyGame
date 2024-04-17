@@ -15,7 +15,7 @@ public class ElementData {
     // Constructor
     public ElementData(String elementName) {
         this.elementName = elementName.toLowerCase(); // Sets name data
-        String imagePath = "/ART/" + elementName.toLowerCase() + ".jpg";
+        String imagePath = "/ART/PNG/" + elementName.toLowerCase() + ".png";
         this.image = new Image(getClass().getResourceAsStream(imagePath));
     }
 

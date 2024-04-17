@@ -24,6 +24,7 @@ public class AlchemyGameController {
     final ObservableList<ElementPair> intersections = FXCollections.observableArrayList();
 
     final ObservableList<ElementData> elementDataList = FXCollections.observableArrayList(); //Stores all the data for elements
+    final ObservableList<ElementData> elementUnlockedList = FXCollections.observableArrayList(); //Stores the unlocked elements
 
     @FXML
     public AnchorPane CombinePane;
@@ -55,7 +56,7 @@ public class AlchemyGameController {
     public void initialize() {
         ImageView[] images = {Fire, Water, Earth, Air, Tree, Stone};
         for (ImageView bases : images) {
-            String imagePath = "/ART/" + bases.getId().toLowerCase() + ".jpg";
+            String imagePath = "/ART/PNG/" + bases.getId().toLowerCase() + ".png";
             Image image = new Image(getClass().getResourceAsStream(imagePath));
             bases.setImage(image);
             enableCopy(bases);
@@ -66,6 +67,10 @@ public class AlchemyGameController {
         List<ElementData> elementList;
         elementList = FileReader.getElements("src/main/resources/ElementList.csv");
         elementDataList.addAll(elementList);
+
+        for (int i = 0; i <= 5; i++) {
+            elementUnlockedList.addAll(elementDataList.get(i));
+        }
 
         // Displays all initialized elements and their combinations
         System.out.print("Initialized Elements:\n");

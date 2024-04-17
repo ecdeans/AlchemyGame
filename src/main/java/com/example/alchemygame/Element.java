@@ -14,7 +14,7 @@ public class Element extends ImageView{
     // Constructor
     public Element(String elementName) {
         this.elementName = elementName.toLowerCase();
-        String imagePath = "/ART/" + elementName.toLowerCase() + ".jpg";
+        String imagePath = "/ART/PNG/" + elementName.toLowerCase() + ".png";
         Image image = new Image(getClass().getResourceAsStream(imagePath));
         this.setImage(image);
         this.setId(elementName);
