@@ -1,10 +1,12 @@
 earth,earth,stone
 earth,air,sand
-earth,stone,magma
+earth,fire,magma
+earth,water,mud
 earth,magma,volcano
 earth,wood,tree
 earth,pickaxe,ore
 air,fire,smoke
+air,water,storm
 fire,water,steam
 fire,stone,furnace
 wood,stone,pickaxe
@@ -12,4 +14,4 @@ volcano,sand,ash
 furnace,ore,iron
 iron,iron,anvil
 alienAlloy,anvil,aang
-air,air,fire
+
