@@ -14,12 +14,17 @@ import javafx.scene.Cursor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.Objects;
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class AlchemyGameController {
     final ObservableList<Element> elements = FXCollections.observableArrayList();
     final ObservableList<ElementPair> intersections = FXCollections.observableArrayList();
+
+    final ObservableList<ElementData> elementDataList = FXCollections.observableArrayList(); //Stores all the data for elements
+    final ObservableList<ElementData> elementUnlockedList = FXCollections.observableArrayList(); //Stores the unlocked elements
 
     @FXML
     public AnchorPane CombinePane;
@@ -51,11 +56,31 @@ public class AlchemyGameController {
     public void initialize() {
         ImageView[] images = {Fire, Water, Earth, Air, Tree, Stone};
         for (ImageView bases : images) {
-            String imagePath = "/ART/" + bases.getId().toLowerCase() + ".jpg";
+            String imagePath = "/ART/PNG/" + bases.getId().toLowerCase() + ".png";
             Image image = new Image(getClass().getResourceAsStream(imagePath));
             bases.setImage(image);
             enableCopy(bases);
         }
+
+
+        // Create the list of objects
+        List<ElementData> elementList;
+        elementList = FileReader.getElements("src/main/resources/ElementList.csv");
+        elementDataList.addAll(elementList);
+
+        for (int i = 0; i <= 5; i++) {
+            elementUnlockedList.addAll(elementDataList.get(i));
+        }
+
+        // Displays all initialized elements and their combinations
+        System.out.print("Initialized Elements:\n");
+        for (ElementData element : elementDataList){
+            System.out.printf("%s\n",element);
+            System.out.print("creates:\n");
+            System.out.printf("%s\n",element.getElementCombinations());
+        }
+
+
     }
 
     static class Delta {
@@ -162,7 +187,6 @@ public class AlchemyGameController {
     }
 
     private void testIntersections(Element src, double x, double y) {
-        //String[][] elementArray = FileReader.getArray();
         intersections.clear();
 
         // for each shape test its intersection with all other shapes.
@@ -172,54 +196,71 @@ public class AlchemyGameController {
                 intersections.add(pair);
             }
         }
-//        for (ElementPair pair : intersections) {
-//            for (String[] elements : elementArray) {
-//                //System.out.printf("%s%s%s",elements[0], elements[1], elements[2]);
-//                // Check if the current row contains both elements a and b
-//                String elementA = pair.getA().getElementName().toLowerCase();
-//                String elementB = pair.getB().getElementName().toLowerCase();
-//                if (elements[0].equals(elementA) & elements[1].equals(elementB) | elements[0].equals(elementB) & elements[1].equals(elementA)) {
-//                    // Get the combination result from the CSV
-//                    String combinationResult = elements[2];
-//                    if (combinationResult != null) {
-//                        combineElements(pair, combinationResult, x, y);
-//                    }
-//                }
-//            }
-//        }
+        for (ElementPair pair : intersections) {
+            if (combine(pair, x, y)){
+                break;
+            }
+        }
     }
 
-    //    private void combine(ElementPair pair, double x, double y) {
-//        String[][] elementArray = FileReader.getArray();
-//
-//        Element a = pair.getA();
-//        Element b = pair.getB();
-//
-//        // Convert element names to lowercase for comparison
-//        String elementA = a.getElementName().toLowerCase();
-//        String elementB = b.getElementName().toLowerCase();
-//
-//        // AHHHHHHH THIS IS WHERE IT BREAKS KINDA SORTA BREKAs
-//        for (String[] elements : elementArray) {
-//            //System.out.printf("%s%s%s",elements[0], elements[1], elements[2]);
-//            // Check if the current row contains both elements a and b
-//                if (elements[0].equals(elementA) && elements[1].equals(elementB) ||
-//                        elements[0].equals(elementB) && elements[1].equals(elementA)) {
-//                // Get the combination result from the CSV
-//                    String combinationResult = elements[2];
-//                    combineElements(pair, combinationResult, x, y);
-//                }
-//            }
-//        }
+    private boolean combine(ElementPair pair, double x, double y) {
+        String[][] elementArray = FileReader.getArray();
+
+        boolean combines = false; // Whether or not a combination happens
+
+        Element a = pair.getA();
+        Element b = pair.getB();
+
+        // Convert element names to lowercase for comparison
+        String elementA = a.getElementName().toLowerCase();
+        String elementB = b.getElementName().toLowerCase();
+
+
+        // AHHHHHHH THIS IS WHERE IT BREAKS KINDA SORTA BREKAs
+        for (ElementData element : elementDataList) { // Loops through the list of elementData
+            // store as tuple?
+
+
+            if (element.getElementName().equals(elementA)){ // If the element data is the data for element A
+                if (element.combinesWith(elementB)){ // If element A reacts with element B
+                    combineElements(pair, element.getResult(elementB), x, y); // Returns the resulting element as a string
+                    //intersections.clear();
+                    combines = true;
+                }
+            }
+
+            // Potentially dead code
+            /*
+            // Check if the current row contains both elements a and b
+                if (Arrays.asList(element).contains(elementA) && Arrays.asList(element).contains(elementB)) {
+                // Get the combination result from the CSV
+                    String combinationResult = getCombinationResult(element);
+
+                    if (combinationResult != null) {
+                        combineElements(pair, combinationResult, x, y);
+                }
+            }
+             */
+
+        }
+
+        return combines;
+    }
+
+    // Method to get the combination result from the CSV array
+    private String getCombinationResult(String[] elements) {
+        // Combination result is in the last column of the CSV
+        return elements[elements.length - 1];
+    }
 
     // Method to combine elements
     private void combineElements(ElementPair pair, String newElementName, double x, double y) {
         Element newElement = new Element(newElementName);
 
         // Add new element and remove old ones from elements list
-        elements.add(newElement);
         elements.remove(pair.getA());
         elements.remove(pair.getB());
+        elements.add(newElement);
 
         // Remove old elements from pane and add new element
         CombinePane.getChildren().remove(pair.getA());
@@ -234,3 +275,133 @@ public class AlchemyGameController {
         newElement.setY(y);
     }
 }
+
+
+//    private void combine(ElementPair pair, double x, double y){
+//        if ((Objects.equals(pair.getA().getId().toLowerCase(), "fire") && Objects.equals(pair.getB().getId().toLowerCase(), "water")) ||
+//                (Objects.equals(pair.getB().getId().toLowerCase(), "fire") && Objects.equals(pair.getA().getId().toLowerCase(), "water"))){
+//
+//            Element newelement = new Element("steam");
+//
+//            elements.add(newelement);
+//            elements.remove(pair.getA());
+//            elements.remove(pair.getB());
+//
+//            CombinePane.getChildren().remove(pair.getA());
+//            CombinePane.getChildren().remove(pair.getB());
+//            CombinePane.getChildren().add(newelement);
+//
+//            enableDrag(newelement);
+//            newelement.setX(x);
+//            newelement.setY(y);
+//        }
+//
+//        else if ((Objects.equals(pair.getA().getId().toLowerCase(), "fire") && Objects.equals(pair.getB().getId().toLowerCase(), "earth")) ||
+//                (Objects.equals(pair.getB().getId().toLowerCase(), "fire") && Objects.equals(pair.getA().getId().toLowerCase(), "earth"))){
+//
+//            Element newelement = new Element("volcano");
+//
+//            elements.add(newelement);
+//            elements.remove(pair.getA());
+//            elements.remove(pair.getB());
+//
+//            CombinePane.getChildren().remove(pair.getA());
+//            CombinePane.getChildren().remove(pair.getB());
+//            CombinePane.getChildren().add(newelement);
+//
+//            enableDrag(newelement);
+//            newelement.setX(x);
+//            newelement.setY(y);
+//        }
+//
+//        else if ((Objects.equals(pair.getA().getId().toLowerCase(), "tree") && Objects.equals(pair.getB().getId().toLowerCase(), "stone")) ||
+//                (Objects.equals(pair.getB().getId().toLowerCase(), "tree") && Objects.equals(pair.getA().getId().toLowerCase(), "stone"))){
+//
+//            Element newelement = new Element("pickaxe");
+//
+//            elements.add(newelement);
+//            elements.remove(pair.getA());
+//            elements.remove(pair.getB());
+//
+//            CombinePane.getChildren().remove(pair.getA());
+//            CombinePane.getChildren().remove(pair.getB());
+//            CombinePane.getChildren().add(newelement);
+//
+//            enableDrag(newelement);
+//            newelement.setX(x);
+//            newelement.setY(y);
+//        }
+//
+//        else if (Objects.equals(pair.getA().getId().toLowerCase(), "earth") &&
+//                (Objects.equals(pair.getB().getId().toLowerCase(), "earth"))) {
+//
+//            Element newelement = new Element("stone");
+//
+//            elements.add(newelement);
+//            elements.remove(pair.getA());
+//            elements.remove(pair.getB());
+//
+//            CombinePane.getChildren().remove(pair.getA());
+//            CombinePane.getChildren().remove(pair.getB());
+//            CombinePane.getChildren().add(newelement);
+//
+//            enableDrag(newelement);
+//            newelement.setX(x);
+//            newelement.setY(y);
+//        }
+//
+//        else if ((Objects.equals(pair.getA().getId().toLowerCase(), "earth") && Objects.equals(pair.getB().getId().toLowerCase(), "pickaxe")) ||
+//                (Objects.equals(pair.getB().getId().toLowerCase(), "earth") && Objects.equals(pair.getA().getId().toLowerCase(), "pickaxe"))){
+//
+//            Element newelement = new Element("ore");
+//
+//            elements.add(newelement);
+//            elements.remove(pair.getA());
+//            elements.remove(pair.getB());
+//
+//            CombinePane.getChildren().remove(pair.getA());
+//            CombinePane.getChildren().remove(pair.getB());
+//            CombinePane.getChildren().add(newelement);
+//
+//            enableDrag(newelement);
+//            newelement.setX(x);
+//            newelement.setY(y);
+//        }
+//
+//        else if ((Objects.equals(pair.getA().getId().toLowerCase(), "stone") && Objects.equals(pair.getB().getId().toLowerCase(), "volcano")) ||
+//                (Objects.equals(pair.getB().getId().toLowerCase(), "stone") && Objects.equals(pair.getA().getId().toLowerCase(), "volcano"))){
+//
+//            Element newelement = new Element("furnace");
+//
+//            elements.add(newelement);
+//            elements.remove(pair.getA());
+//            elements.remove(pair.getB());
+//
+//            CombinePane.getChildren().remove(pair.getA());
+//            CombinePane.getChildren().remove(pair.getB());
+//            CombinePane.getChildren().add(newelement);
+//
+//            enableDrag(newelement);
+//            newelement.setX(x);
+//            newelement.setY(y);
+//        }
+//
+//        else if ((Objects.equals(pair.getA().getId().toLowerCase(), "ore") && Objects.equals(pair.getB().getId().toLowerCase(), "furnace")) ||
+//                (Objects.equals(pair.getB().getId().toLowerCase(), "ore") && Objects.equals(pair.getA().getId().toLowerCase(), "furnace"))){
+//
+//            Element newelement = new Element("iron");
+//
+//            elements.add(newelement);
+//            elements.remove(pair.getA());
+//            elements.remove(pair.getB());
+//
+//            CombinePane.getChildren().remove(pair.getA());
+//            CombinePane.getChildren().remove(pair.getB());
+//            CombinePane.getChildren().add(newelement);
+//
+//            enableDrag(newelement);
+//            newelement.setX(x);
+//            newelement.setY(y);
+//        }
+//    }
+//}
