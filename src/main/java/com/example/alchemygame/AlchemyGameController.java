@@ -276,7 +276,6 @@ public class AlchemyGameController {
     }
 }
 
-
 //    private void combine(ElementPair pair, double x, double y){
 //        if ((Objects.equals(pair.getA().getId().toLowerCase(), "fire") && Objects.equals(pair.getB().getId().toLowerCase(), "water")) ||
 //                (Objects.equals(pair.getB().getId().toLowerCase(), "fire") && Objects.equals(pair.getA().getId().toLowerCase(), "water"))){
