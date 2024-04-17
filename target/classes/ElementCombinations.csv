@@ -1,40 +1,19 @@
 earth,earth,stone
 earth,air,sand
-earth,fire,magma
-earth,water,mud
+earth,stone,magma
 earth,magma,volcano
 earth,wood,tree
 earth,pickaxe,ore
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 air,fire,smoke
-air,water,storm
-=======
-air,fire, smoke
->>>>>>> parent of e170c75 (Merge branch 'markBranch' into evaBranch)
-=======
-air,fire, smoke
->>>>>>> parent of e170c75 (Merge branch 'markBranch' into evaBranch)
-=======
-air,fire, smoke
->>>>>>> parent of e170c75 (Merge branch 'markBranch' into evaBranch)
 fire,water,steam
 fire,stone,furnace
-tree,stone,pickaxe
+wood,stone,pickaxe
 volcano,sand,ash
 furnace,ore,iron
 iron,iron,anvil
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
 alienAlloy,anvil,aang
->>>>>>> parent of e170c75 (Merge branch 'markBranch' into evaBranch)
-=======
-alienAlloy,anvil,aang
->>>>>>> parent of e170c75 (Merge branch 'markBranch' into evaBranch)
-=======
-alienAlloy,anvil,aang
->>>>>>> parent of e170c75 (Merge branch 'markBranch' into evaBranch)
+air,air,fire
+tree,tree,wood
+tree,fire,ash
+pickaxe,stone,ore
+wood,fire,ash
