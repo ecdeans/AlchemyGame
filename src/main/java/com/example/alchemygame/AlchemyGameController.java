@@ -14,12 +14,17 @@ import javafx.scene.Cursor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.File;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class AlchemyGameController {
     final ObservableList<Element> elements = FXCollections.observableArrayList();
     final ObservableList<ElementPair> intersections = FXCollections.observableArrayList();
+
+    final ObservableList<ElementData> elementDataList = FXCollections.observableArrayList(); //Stores all the data for elements
+    final ObservableList<ElementData> elementUnlockedList = FXCollections.observableArrayList(); //Stores the unlocked elements
 
     @FXML
     public AnchorPane CombinePane;
@@ -51,11 +56,31 @@ public class AlchemyGameController {
     public void initialize() {
         ImageView[] images = {Fire, Water, Earth, Air, Tree, Stone};
         for (ImageView bases : images) {
-            String imagePath = "/ART/" + bases.getId().toLowerCase() + ".jpg";
+            String imagePath = "/ART/PNG/" + bases.getId().toLowerCase() + ".png";
             Image image = new Image(getClass().getResourceAsStream(imagePath));
             bases.setImage(image);
             enableCopy(bases);
         }
+
+
+        // Create the list of objects
+        List<ElementData> elementList;
+        elementList = FileReader.getElements("src/main/resources/ElementList.csv");
+        elementDataList.addAll(elementList);
+
+        for (int i = 0; i <= 5; i++) {
+            elementUnlockedList.addAll(elementDataList.get(i));
+        }
+
+        // Displays all initialized elements and their combinations
+        System.out.print("Initialized Elements:\n");
+        for (ElementData element : elementDataList){
+            System.out.printf("%s\n",element);
+            System.out.print("creates:\n");
+            System.out.printf("%s\n",element.getElementCombinations());
+        }
+
+
     }
 
     static class Delta {
@@ -172,12 +197,16 @@ public class AlchemyGameController {
             }
         }
         for (ElementPair pair : intersections) {
-            combine(pair, x, y);
+            if (combine(pair, x, y)){
+                break;
+            }
         }
     }
 
-    private void combine(ElementPair pair, double x, double y) {
+    private boolean combine(ElementPair pair, double x, double y) {
         String[][] elementArray = FileReader.getArray();
+
+        boolean combines = false; // Whether or not a combination happens
 
         Element a = pair.getA();
         Element b = pair.getB();
@@ -186,19 +215,36 @@ public class AlchemyGameController {
         String elementA = a.getElementName().toLowerCase();
         String elementB = b.getElementName().toLowerCase();
 
+
         // AHHHHHHH THIS IS WHERE IT BREAKS KINDA SORTA BREKAs
-        for (String[] elements : elementArray) {
+        for (ElementData element : elementDataList) { // Loops through the list of elementData
             // store as tuple?
+
+
+            if (element.getElementName().equals(elementA)){ // If the element data is the data for element A
+                if (element.combinesWith(elementB)){ // If element A reacts with element B
+                    combineElements(pair, element.getResult(elementB), x, y); // Returns the resulting element as a string
+                    //intersections.clear();
+                    combines = true;
+                }
+            }
+
+            // Potentially dead code
+            /*
             // Check if the current row contains both elements a and b
-                if (Arrays.asList(elements).contains(elementA) && Arrays.asList(elements).contains(elementB)) {
+                if (Arrays.asList(element).contains(elementA) && Arrays.asList(element).contains(elementB)) {
                 // Get the combination result from the CSV
-                    String combinationResult = getCombinationResult(elements);
+                    String combinationResult = getCombinationResult(element);
 
                     if (combinationResult != null) {
                         combineElements(pair, combinationResult, x, y);
                 }
             }
+             */
+
         }
+
+        return combines;
     }
 
     // Method to get the combination result from the CSV array
