@@ -7,8 +7,12 @@ earth,wood,tree
 earth,pickaxe,ore
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 air,fire,smoke
 air,water,storm
+=======
+air,fire, smoke
+>>>>>>> parent of e170c75 (Merge branch 'markBranch' into evaBranch)
 =======
 air,fire, smoke
 >>>>>>> parent of e170c75 (Merge branch 'markBranch' into evaBranch)
@@ -23,7 +27,11 @@ furnace,ore,iron
 iron,iron,anvil
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+alienAlloy,anvil,aang
+>>>>>>> parent of e170c75 (Merge branch 'markBranch' into evaBranch)
 =======
 alienAlloy,anvil,aang
 >>>>>>> parent of e170c75 (Merge branch 'markBranch' into evaBranch)
