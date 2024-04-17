@@ -192,12 +192,16 @@ public class AlchemyGameController {
             }
         }
         for (ElementPair pair : intersections) {
-            combine(pair, x, y);
+            if (combine(pair, x, y)){
+                break;
+            }
         }
     }
 
-    private void combine(ElementPair pair, double x, double y) {
+    private boolean combine(ElementPair pair, double x, double y) {
         String[][] elementArray = FileReader.getArray();
+
+        boolean combines = false; // Whether or not a combination happens
 
         Element a = pair.getA();
         Element b = pair.getB();
@@ -215,6 +219,8 @@ public class AlchemyGameController {
             if (element.getElementName().equals(elementA)){ // If the element data is the data for element A
                 if (element.combinesWith(elementB)){ // If element A reacts with element B
                     combineElements(pair, element.getResult(elementB), x, y); // Returns the resulting element as a string
+                    //intersections.clear();
+                    combines = true;
                 }
             }
 
@@ -232,6 +238,8 @@ public class AlchemyGameController {
              */
 
         }
+
+        return combines;
     }
 
     // Method to get the combination result from the CSV array
