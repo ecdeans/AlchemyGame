@@ -48,9 +48,9 @@ public class AlchemyGameController {
     @FXML
     private ColumnConstraints mixingPanel;
 
-    public void initialize(){
-        ImageView[] images = { Fire, Water, Earth, Air, Tree, Stone};
-        for (ImageView bases : images){
+    public void initialize() {
+        ImageView[] images = {Fire, Water, Earth, Air, Tree, Stone};
+        for (ImageView bases : images) {
             String imagePath = "/ART/" + bases.getId().toLowerCase() + ".jpg";
             Image image = new Image(getClass().getResourceAsStream(imagePath));
             bases.setImage(image);
@@ -58,7 +58,9 @@ public class AlchemyGameController {
         }
     }
 
-    static class Delta { double x, y; }
+    static class Delta {
+        double x, y;
+    }
 
     private void enableDrag(Element element) {
         final Delta dragDelta = new Delta();
@@ -103,7 +105,6 @@ public class AlchemyGameController {
             }
         });
     }
-
 
 
     private void enableCopy(ImageView element) {
@@ -161,168 +162,34 @@ public class AlchemyGameController {
     }
 
     private void testIntersections(Element src, double x, double y) {
-        String[][] elementArray = FileReader.getArray();
+        //String[][] elementArray = FileReader.getArray();
         intersections.clear();
 
         // for each shape test its intersection with all other shapes.
         for (Element dest : elements) {
             ElementPair pair = new ElementPair(src, dest);
-            if (!intersections.contains(pair) && pair.intersects()){
+            if (!intersections.contains(pair) && pair.intersects()) {
                 intersections.add(pair);
             }
         }
-<<<<<<< Updated upstream
-        for (ElementPair pair : intersections){
-            combine(pair, x, y);
-        }
+//        for (ElementPair pair : intersections) {
+//            for (String[] elements : elementArray) {
+//                //System.out.printf("%s%s%s",elements[0], elements[1], elements[2]);
+//                // Check if the current row contains both elements a and b
+//                String elementA = pair.getA().getElementName().toLowerCase();
+//                String elementB = pair.getB().getElementName().toLowerCase();
+//                if (elements[0].equals(elementA) & elements[1].equals(elementB) | elements[0].equals(elementB) & elements[1].equals(elementA)) {
+//                    // Get the combination result from the CSV
+//                    String combinationResult = elements[2];
+//                    if (combinationResult != null) {
+//                        combineElements(pair, combinationResult, x, y);
+//                    }
+//                }
+//            }
+//        }
     }
 
-    private void combine(ElementPair pair, double x, double y){
-        if ((Objects.equals(pair.getA().getId().toLowerCase(), "fire") && Objects.equals(pair.getB().getId().toLowerCase(), "water")) ||
-                (Objects.equals(pair.getB().getId().toLowerCase(), "fire") && Objects.equals(pair.getA().getId().toLowerCase(), "water"))){
-
-            Element newelement = new Element("steam");
-
-            elements.add(newelement);
-            elements.remove(pair.getA());
-            elements.remove(pair.getB());
-
-            CombinePane.getChildren().remove(pair.getA());
-            CombinePane.getChildren().remove(pair.getB());
-            CombinePane.getChildren().add(newelement);
-
-            enableDrag(newelement);
-            newelement.setX(x);
-            newelement.setY(y);
-        }
-
-        else if ((Objects.equals(pair.getA().getId().toLowerCase(), "fire") && Objects.equals(pair.getB().getId().toLowerCase(), "earth")) ||
-                (Objects.equals(pair.getB().getId().toLowerCase(), "fire") && Objects.equals(pair.getA().getId().toLowerCase(), "earth"))){
-
-            Element newelement = new Element("volcano");
-
-            elements.add(newelement);
-            elements.remove(pair.getA());
-            elements.remove(pair.getB());
-
-            CombinePane.getChildren().remove(pair.getA());
-            CombinePane.getChildren().remove(pair.getB());
-            CombinePane.getChildren().add(newelement);
-
-            enableDrag(newelement);
-            newelement.setX(x);
-            newelement.setY(y);
-        }
-
-        else if ((Objects.equals(pair.getA().getId().toLowerCase(), "tree") && Objects.equals(pair.getB().getId().toLowerCase(), "stone")) ||
-                (Objects.equals(pair.getB().getId().toLowerCase(), "tree") && Objects.equals(pair.getA().getId().toLowerCase(), "stone"))){
-
-            Element newelement = new Element("pickaxe");
-
-            elements.add(newelement);
-            elements.remove(pair.getA());
-            elements.remove(pair.getB());
-
-            CombinePane.getChildren().remove(pair.getA());
-            CombinePane.getChildren().remove(pair.getB());
-            CombinePane.getChildren().add(newelement);
-
-            enableDrag(newelement);
-            newelement.setX(x);
-            newelement.setY(y);
-        }
-
-        else if (Objects.equals(pair.getA().getId().toLowerCase(), "earth") &&
-                (Objects.equals(pair.getB().getId().toLowerCase(), "earth"))) {
-
-            Element newelement = new Element("stone");
-
-            elements.add(newelement);
-            elements.remove(pair.getA());
-            elements.remove(pair.getB());
-
-            CombinePane.getChildren().remove(pair.getA());
-            CombinePane.getChildren().remove(pair.getB());
-            CombinePane.getChildren().add(newelement);
-
-            enableDrag(newelement);
-            newelement.setX(x);
-            newelement.setY(y);
-        }
-
-        else if ((Objects.equals(pair.getA().getId().toLowerCase(), "earth") && Objects.equals(pair.getB().getId().toLowerCase(), "pickaxe")) ||
-                (Objects.equals(pair.getB().getId().toLowerCase(), "earth") && Objects.equals(pair.getA().getId().toLowerCase(), "pickaxe"))){
-
-            Element newelement = new Element("ore");
-
-            elements.add(newelement);
-            elements.remove(pair.getA());
-            elements.remove(pair.getB());
-
-            CombinePane.getChildren().remove(pair.getA());
-            CombinePane.getChildren().remove(pair.getB());
-            CombinePane.getChildren().add(newelement);
-
-            enableDrag(newelement);
-            newelement.setX(x);
-            newelement.setY(y);
-        }
-
-        else if ((Objects.equals(pair.getA().getId().toLowerCase(), "stone") && Objects.equals(pair.getB().getId().toLowerCase(), "volcano")) ||
-                (Objects.equals(pair.getB().getId().toLowerCase(), "stone") && Objects.equals(pair.getA().getId().toLowerCase(), "volcano"))){
-
-            Element newelement = new Element("furnace");
-
-            elements.add(newelement);
-            elements.remove(pair.getA());
-            elements.remove(pair.getB());
-
-            CombinePane.getChildren().remove(pair.getA());
-            CombinePane.getChildren().remove(pair.getB());
-            CombinePane.getChildren().add(newelement);
-
-            enableDrag(newelement);
-            newelement.setX(x);
-            newelement.setY(y);
-        }
-
-        else if ((Objects.equals(pair.getA().getId().toLowerCase(), "ore") && Objects.equals(pair.getB().getId().toLowerCase(), "furnace")) ||
-                (Objects.equals(pair.getB().getId().toLowerCase(), "ore") && Objects.equals(pair.getA().getId().toLowerCase(), "furnace"))){
-
-            Element newelement = new Element("iron");
-
-            elements.add(newelement);
-            elements.remove(pair.getA());
-            elements.remove(pair.getB());
-
-            CombinePane.getChildren().remove(pair.getA());
-            CombinePane.getChildren().remove(pair.getB());
-            CombinePane.getChildren().add(newelement);
-
-            enableDrag(newelement);
-            newelement.setX(x);
-            newelement.setY(y);
-        }
-    }
-=======
-        for (ElementPair pair : intersections) {
-            for (String[] elements : elementArray) {
-                //System.out.printf("%s%s%s",elements[0], elements[1], elements[2]);
-                // Check if the current row contains both elements a and b
-                String elementA = pair.getA().getElementName().toLowerCase();
-                String elementB = pair.getB().getElementName().toLowerCase();
-                if (elements[0].equals(elementA) & elements[1].equals(elementB) | elements[0].equals(elementB) & elements[1].equals(elementA)) {
-                    // Get the combination result from the CSV
-                    String combinationResult = elements[2];
-                    if (combinationResult != null) {
-                        combineElements(pair, combinationResult, x, y);
-                    }
-                }
-            }
-        }
-    }
-
-//    private void combine(ElementPair pair, double x, double y) {
+    //    private void combine(ElementPair pair, double x, double y) {
 //        String[][] elementArray = FileReader.getArray();
 //
 //        Element a = pair.getA();
@@ -366,5 +233,4 @@ public class AlchemyGameController {
         newElement.setX(x);
         newElement.setY(y);
     }
->>>>>>> Stashed changes
 }
