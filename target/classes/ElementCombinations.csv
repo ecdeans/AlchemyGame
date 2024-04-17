@@ -15,4 +15,5 @@ alienAlloy,anvil,aang
 air,air,fire
 tree,tree,wood
 tree,fire,ash
-volcano,tree,ash
+pickaxe,stone,ore
+wood,fire,ash

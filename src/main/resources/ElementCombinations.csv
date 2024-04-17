@@ -13,3 +13,7 @@ furnace,ore,iron
 iron,iron,anvil
 alienAlloy,anvil,aang
 air,air,fire
+tree,tree,wood
+tree,fire,ash
+pickaxe,stone,ore
+wood,fire,ash
