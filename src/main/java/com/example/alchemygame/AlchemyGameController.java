@@ -161,6 +161,7 @@ public class AlchemyGameController {
     }
 
     private void testIntersections(Element src, double x, double y) {
+        String[][] elementArray = FileReader.getArray();
         intersections.clear();
 
         // for each shape test its intersection with all other shapes.
@@ -170,6 +171,7 @@ public class AlchemyGameController {
                 intersections.add(pair);
             }
         }
+<<<<<<< Updated upstream
         for (ElementPair pair : intersections){
             combine(pair, x, y);
         }
@@ -302,4 +304,67 @@ public class AlchemyGameController {
             newelement.setY(y);
         }
     }
+=======
+        for (ElementPair pair : intersections) {
+            for (String[] elements : elementArray) {
+                //System.out.printf("%s%s%s",elements[0], elements[1], elements[2]);
+                // Check if the current row contains both elements a and b
+                String elementA = pair.getA().getElementName().toLowerCase();
+                String elementB = pair.getB().getElementName().toLowerCase();
+                if (elements[0].equals(elementA) & elements[1].equals(elementB) | elements[0].equals(elementB) & elements[1].equals(elementA)) {
+                    // Get the combination result from the CSV
+                    String combinationResult = elements[2];
+                    if (combinationResult != null) {
+                        combineElements(pair, combinationResult, x, y);
+                    }
+                }
+            }
+        }
+    }
+
+//    private void combine(ElementPair pair, double x, double y) {
+//        String[][] elementArray = FileReader.getArray();
+//
+//        Element a = pair.getA();
+//        Element b = pair.getB();
+//
+//        // Convert element names to lowercase for comparison
+//        String elementA = a.getElementName().toLowerCase();
+//        String elementB = b.getElementName().toLowerCase();
+//
+//        // AHHHHHHH THIS IS WHERE IT BREAKS KINDA SORTA BREKAs
+//        for (String[] elements : elementArray) {
+//            //System.out.printf("%s%s%s",elements[0], elements[1], elements[2]);
+//            // Check if the current row contains both elements a and b
+//                if (elements[0].equals(elementA) && elements[1].equals(elementB) ||
+//                        elements[0].equals(elementB) && elements[1].equals(elementA)) {
+//                // Get the combination result from the CSV
+//                    String combinationResult = elements[2];
+//                    combineElements(pair, combinationResult, x, y);
+//                }
+//            }
+//        }
+
+    // Method to combine elements
+    private void combineElements(ElementPair pair, String newElementName, double x, double y) {
+        Element newElement = new Element(newElementName);
+
+        // Add new element and remove old ones from elements list
+        elements.add(newElement);
+        elements.remove(pair.getA());
+        elements.remove(pair.getB());
+
+        // Remove old elements from pane and add new element
+        CombinePane.getChildren().remove(pair.getA());
+        CombinePane.getChildren().remove(pair.getB());
+        CombinePane.getChildren().add(newElement);
+
+        // Give new element drag
+        enableDrag(newElement);
+
+        // Set position for the new element
+        newElement.setX(x);
+        newElement.setY(y);
+    }
+>>>>>>> Stashed changes
 }
