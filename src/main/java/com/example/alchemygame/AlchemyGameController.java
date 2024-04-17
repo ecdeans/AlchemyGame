@@ -188,9 +188,8 @@ public class AlchemyGameController {
 
         // AHHHHHHH THIS IS WHERE IT BREAKS KINDA SORTA BREKAs
         for (String[] elements : elementArray) {
-            String[] combiningElementsSubset = Arrays.copyOfRange(elements, 0, 1);
             // Check if the current row contains both elements a and b
-                if (Arrays.asList(combiningElementsSubset).contains(elementA) && Arrays.asList(combiningElementsSubset).contains(elementB)) {
+                if (Arrays.asList(elements).contains(elementA) && Arrays.asList(elements).contains(elementB)) {
                 // Get the combination result from the CSV
                     String combinationResult = getCombinationResult(elements);
 
