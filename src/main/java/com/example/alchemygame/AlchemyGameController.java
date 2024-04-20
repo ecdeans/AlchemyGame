@@ -295,7 +295,9 @@ public class AlchemyGameController {
                 newElement.setImage(element.getImage());
                 newElement.setId(newElement.getElementName());
                 newElement.setX(mouseEvent.getX() + dragDelta.x);
+                newElement.setX(250);
                 newElement.setY(mouseEvent.getY() + dragDelta.y);
+                newElement.setY(200);
                 newElement.setEffect(new DropShadow());
 
                 // add it to array and scene, and enable dragging element
