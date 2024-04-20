@@ -14,8 +14,26 @@ public class Element extends ImageView{
     // Constructor
     public Element(String elementName) {
         this.elementName = elementName.toLowerCase();
-        String imagePath = "/ART/PNG/" + elementName.toLowerCase() + ".png";
-        Image image = new Image(getClass().getResourceAsStream(imagePath));
+        //String imagePath = "/ART/PNG/" + elementName.toLowerCase() + ".png";
+        //Image image = new Image(getClass().getResourceAsStream(imagePath));
+
+        String imagePath = "";
+        Image image;
+        try {
+            imagePath = "/ART/PNG64x64/" + elementName.toLowerCase() + ".png";
+            image = new Image(getClass().getResourceAsStream(imagePath));
+        }
+        catch(RuntimeException e1){
+            try {
+                imagePath = "/ART/PNG16x16/" + elementName.toLowerCase() + ".png";
+                image = new Image(getClass().getResourceAsStream(imagePath));
+            }
+            catch(RuntimeException e2) {
+                imagePath = "/ART/PNG16x16/Default.png";
+                image = new Image(getClass().getResourceAsStream(imagePath));
+            }
+        }
+
         this.setImage(image);
         this.setId(elementName);
     }

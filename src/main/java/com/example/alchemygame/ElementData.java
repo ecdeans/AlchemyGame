@@ -15,8 +15,27 @@ public class ElementData {
     // Constructor
     public ElementData(String elementName) {
         this.elementName = elementName.toLowerCase(); // Sets name data
-        String imagePath = "/ART/PNG/" + elementName.toLowerCase() + ".png";
-        this.image = new Image(getClass().getResourceAsStream(imagePath));
+        //String imagePath = "/ART/PNG/" + elementName.toLowerCase() + ".png";
+        //this.image = new Image(getClass().getResourceAsStream(imagePath));
+        String imagePath = "";
+        Image image;
+        try {
+            imagePath = "/ART/PNG64x64/" + elementName.toLowerCase() + ".png";
+            image = new Image(getClass().getResourceAsStream(imagePath));
+        }
+        catch(RuntimeException e1){
+            try {
+                imagePath = "/ART/PNG16x16/" + elementName.toLowerCase() + ".png";
+                image = new Image(getClass().getResourceAsStream(imagePath));
+            }
+            catch(RuntimeException e2) {
+                imagePath = "/ART/PNG16x16/Default.png";
+                image = new Image(getClass().getResourceAsStream(imagePath));
+            }
+        }
+
+        this.image = image;
+
     }
 
     // Getters
