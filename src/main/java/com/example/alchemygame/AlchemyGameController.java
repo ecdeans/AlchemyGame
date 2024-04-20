@@ -1,8 +1,9 @@
 package com.example.alchemygame;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ScrollBar;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -25,55 +26,176 @@ public class AlchemyGameController {
 
     final ObservableList<ElementData> elementDataList = FXCollections.observableArrayList(); //Stores all the data for elements
     final ObservableList<ElementData> elementUnlockedList = FXCollections.observableArrayList(); //Stores the unlocked elements
+    final ObservableList<ElementData> elementLockedList = FXCollections.observableArrayList(); //Stores the unlocked elements
 
-    @FXML
-    public AnchorPane CombinePane;
 
-    @FXML
-    private ImageView Fire;
-
-    @FXML
-    private ImageView Water;
-
-    @FXML
-    private ImageView Earth;
 
     @FXML
     private ImageView Air;
 
     @FXML
-    private ImageView Tree;
+    private ImageView Anvil;
+
+    @FXML
+    private ImageView Ash;
+
+    @FXML
+    private ImageView Brick;
+
+    @FXML
+    private AnchorPane CombinePane;
+
+    @FXML
+    private ImageView Earth;
+
+    @FXML
+    private ImageView Fire;
+
+    @FXML
+    private ImageView Furnace;
+
+    @FXML
+    private ImageView Glass;
+
+    @FXML
+    private ImageView House;
+
+    @FXML
+    private ImageView Iron;
+
+    @FXML
+    private ImageView Magma;
+
+    @FXML
+    private Label NextTargetBox;
+
+    @FXML
+    private ImageView Ore;
+
+    @FXML
+    private ImageView Pickaxe;
+
+    @FXML
+    private ImageView Sand;
+
+    @FXML
+    private ImageView Steam;
 
     @FXML
     private ImageView Stone;
 
     @FXML
-    private ScrollBar elementsScrollBar;
+    private ImageView Tree;
+
+    @FXML
+    private ImageView Volcano;
+
+    @FXML
+    private ImageView Water;
+
+    @FXML
+    private ImageView Wood;
 
     @FXML
     private ColumnConstraints mixingPanel;
 
+
+
+    @FXML
+    private ImageView Trashcan;
+
+    private String targetElement;
+
     public void initialize() {
+
+
+        // Set up trash can
+        String trashImagePath = "/ART/PNG64x64/" + Trashcan.getId().toLowerCase() + ".png";
+        Image trashImage = new Image(getClass().getResourceAsStream(trashImagePath));
+        Trashcan.setImage(trashImage);
+        Trashcan.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) { if (!mouseEvent.isPrimaryButtonDown()) { Trashcan.getScene().setCursor(Cursor.HAND); }}
+        });
+        Trashcan.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) { if (!mouseEvent.isPrimaryButtonDown()) { Trashcan.getScene().setCursor(Cursor.DEFAULT); }}
+        });
+
+
+
+
+        ImageView[] allImages = {Fire, Water, Earth, Air, Tree, Stone, Steam, Wood, Sand, Magma, Ore, Iron, Ash, Volcano, Pickaxe, Furnace, Anvil, Glass, Brick, House};
+
+        // Initialize the base elements
         ImageView[] images = {Fire, Water, Earth, Air, Tree, Stone};
+        //ImageView[] images = {Fire, Water, Earth, Air, Tree, Stone, Steam};
+        String imagePath = "";
+        Image image;
         for (ImageView bases : images) {
-            String imagePath = "/ART/PNG/" + bases.getId().toLowerCase() + ".png";
-            Image image = new Image(getClass().getResourceAsStream(imagePath));
+            try {
+            imagePath = "/ART/PNG64x64/" + bases.getId().toLowerCase() + ".png";
+            image = new Image(getClass().getResourceAsStream(imagePath));
+            }
+            catch(RuntimeException e1){
+                try {
+                    imagePath = "/ART/PNG16x16/" + bases.getId().toLowerCase() + ".png";
+                    image = new Image(getClass().getResourceAsStream(imagePath));
+                }
+                catch(RuntimeException e2) {
+                    imagePath = "/ART/PNG16x16/Default.png";
+                    image = new Image(getClass().getResourceAsStream(imagePath));
+                }
+            }
+
             bases.setImage(image);
             enableCopy(bases);
         }
+        // End initialization
+
+
+        // Initialize the Unlockable elements
+        ImageView[] images2 = {Steam, Wood, Sand, Magma, Ore, Iron, Ash, Volcano, Pickaxe, Furnace, Anvil, Glass, Brick, House};
+        for (ImageView bases : images2) {
+            try {
+                imagePath = "/ART/PNG64x64/" + bases.getId().toLowerCase() + ".png";
+                image = new Image(getClass().getResourceAsStream(imagePath));
+            }
+            catch(RuntimeException e1){
+                try {
+                    imagePath = "/ART/PNG16x16/" + bases.getId().toLowerCase() + ".png";
+                    image = new Image(getClass().getResourceAsStream(imagePath));
+                }
+                catch(RuntimeException e2) {
+                    imagePath = "/ART/PNG16x16/Default.png";
+                    image = new Image(getClass().getResourceAsStream(imagePath));
+                }
+            }
+
+            bases.setImage(image);
+            enableCopy(bases);
+            bases.setVisible(false); // Hide until unlocked
+        }
+        // End initialization
 
 
         // Create the list of objects
         List<ElementData> elementList;
         elementList = FileReader.getElements("src/main/resources/ElementList.csv");
         elementDataList.addAll(elementList);
+        elementLockedList.addAll(elementList);
 
         for (int i = 0; i <= 5; i++) {
             elementUnlockedList.addAll(elementDataList.get(i));
+            elementLockedList.removeAll(elementDataList.get(i));
+            System.out.print(elementLockedList.size());
+        }
+        for (ElementData element : elementLockedList) {
+            System.out.print(element.getElementName());
         }
 
         // Displays all initialized elements and their combinations
-        System.out.print("Initialized Elements:\n");
+        System.out.print("\nInitialized Elements:\n");
         for (ElementData element : elementDataList){
             System.out.printf("%s\n",element);
             System.out.print("creates:\n");
@@ -81,6 +203,26 @@ public class AlchemyGameController {
         }
 
 
+        randomizeTarget();
+
+    }
+
+    // Picks a new target element and displays it
+    private void randomizeTarget(){
+        if (!elementLockedList.isEmpty()){
+            int randomNum = (int) (Math.random() * elementLockedList.size());
+            //randomNum = 9;
+            String target = "Next Target: %s".formatted(elementLockedList.get(randomNum).getElementName());
+
+            targetElement = elementLockedList.get(randomNum).getElementName();
+
+
+            NextTargetBox.setText(target);
+        }
+        else{
+            String target = "All Elements Found!";
+            NextTargetBox.setText(target);
+        }
     }
 
     static class Delta {
@@ -102,6 +244,10 @@ public class AlchemyGameController {
         element.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                if (element.getBoundsInLocal().getMinX() <= 0){ element.setX(0); }
+                if (element.getBoundsInLocal().getMinY() <= 0){ element.setY(0); }
+                if (element.getBoundsInLocal().getMaxX() >= 600){ element.setX(600-64); }
+                if (element.getBoundsInLocal().getMaxY() >= 500){ element.setY(500-64); }
                 element.getScene().setCursor(Cursor.HAND);
                 testIntersections(element, element.getX(), element.getY());
             }
@@ -142,18 +288,21 @@ public class AlchemyGameController {
                 dragDelta.y = element.getY() - mouseEvent.getY();
 
                 // Make new movable element
-                Element newelement = new Element(element.getId());
+                Element newElement = new Element(element.getId());
+                newElement.setFitHeight(64);
+                newElement.setFitWidth(64);
                 // Setting the image
-                newelement.setImage(element.getImage());
-                newelement.setId(newelement.getElementName());
-                newelement.setX(mouseEvent.getX() + dragDelta.x);
-                newelement.setY(mouseEvent.getY() + dragDelta.y);
+                newElement.setImage(element.getImage());
+                newElement.setId(newElement.getElementName());
+                newElement.setX(mouseEvent.getX() + dragDelta.x);
+                newElement.setY(mouseEvent.getY() + dragDelta.y);
+                newElement.setEffect(new DropShadow());
 
                 // add it to array and scene, and enable dragging element
-                CombinePane.getChildren().add(newelement);
-                elements.add(newelement);
+                CombinePane.getChildren().add(newElement);
+                elements.add(newElement);
                 //System.out.println(elements);
-                enableDrag(newelement);
+                enableDrag(newElement);
             }
         });
         element.setOnMouseReleased(new EventHandler<MouseEvent>() {
@@ -255,7 +404,13 @@ public class AlchemyGameController {
 
     // Method to combine elements
     private void combineElements(ElementPair pair, String newElementName, double x, double y) {
+        ImageView[] allImages = {Fire, Water, Earth, Air, Tree, Stone, Steam, Wood, Sand, Magma, Ore, Iron, Ash, Volcano, Pickaxe, Furnace, Anvil, Glass, Brick, House};
+
+
         Element newElement = new Element(newElementName);
+        newElement.setFitHeight(64);
+        newElement.setFitWidth(64);
+        newElement.setEffect(new DropShadow());
 
         // Add new element and remove old ones from elements list
         elements.remove(pair.getA());
@@ -273,6 +428,59 @@ public class AlchemyGameController {
         // Set position for the new element
         newElement.setX(x);
         newElement.setY(y);
+
+        // Adds to unlockable elements if not yet
+        boolean unlocked = false;
+        for (ElementData element : elementUnlockedList) {
+            if (element.getElementName().equals(newElement.getElementName())) {
+                unlocked = true;
+            }
+        }
+        if (!unlocked) {
+            System.out.printf("\nUnlocked %s",newElement.getElementName());
+
+            ElementData newUnlockedElement = new ElementData(newElement.getElementName());
+            elementUnlockedList.add(newUnlockedElement);
+
+
+            for (ElementData elementUnlockCheck : elementLockedList) {
+                if (elementUnlockCheck.getElementName().equals(newUnlockedElement.getElementName())){
+                    elementLockedList.remove(elementUnlockCheck);
+                    break;
+                }
+            }
+            //elementLockedList.remove(newUnlockedElement);
+            //Steam.getId();
+            for (ImageView elementCheck : allImages){
+                // UNLOCKS ELEMENT FOR USE
+                if (elementCheck.getId().toLowerCase().equals(newUnlockedElement.getElementName())){
+                    System.out.print(elementCheck.getId());
+                    elementCheck.setVisible(true);
+                }
+            }
+
+            if (targetElement.equals(newUnlockedElement.getElementName())){ randomizeTarget(); }
+
+            //System.out.print(Steam.getId());
+
+            System.out.printf("\nUnlocked list: %s",elementUnlockedList);
+            System.out.printf("\nLocked list: %s",elementLockedList);
+        }
+
+
+
+
+
+
+
+    }
+
+    // Deletes whole board
+    @FXML
+    void clearBoard(MouseEvent event) {
+        CombinePane.getChildren().clear();
+        intersections.clear();
+        elements.clear();
     }
 }
 
