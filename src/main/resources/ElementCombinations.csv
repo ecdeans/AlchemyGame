@@ -46,3 +46,6 @@ steam,brick,furnace
 fire,earth,magma
 stone,tree,wood
 furnace,air,ash
+water,ash,brick
+earth,ash,volcano
+air,stone,sand

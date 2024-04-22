@@ -43,9 +43,9 @@ magma,wood,ash
 magma,tree,ash
 water,air,steam
 steam,brick,furnace
-<<<<<<< HEAD
-=======
 fire,earth,magma
 stone,tree,wood
 furnace,air,ash
->>>>>>> 1824a465a24762567171967988e527ff8a1cc2df
+water,ash,brick
+earth,ash,volcano
+air,stone,sand
