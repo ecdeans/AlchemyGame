@@ -1,11 +1,11 @@
 package com.example.alchemygame;
 
-// HIII
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 
 public class AlchemyGameApplication extends Application{
     @Override
@@ -14,6 +14,8 @@ public class AlchemyGameApplication extends Application{
 
         Scene scene = new Scene(root);
         stage.setTitle("Alchemy Game");
+        stage.setResizable(false);
+        stage.getIcons().add( new Image(getClass().getResourceAsStream("/ART/PNG64x64/Fire.png")) );
         stage.setScene(scene);
         stage.show();
     }
