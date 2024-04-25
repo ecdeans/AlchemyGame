@@ -1,7 +1,5 @@
 package com.example.alchemygame;
 
-import javafx.scene.image.ImageView;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +13,7 @@ public class FileReader {
 
 
     // store in format [[(tuple combining elements), result], ...]
-   public static String[][] readCSV(String filePath) {
+    public static String[][] readCSV(String filePath) {
         List<String[]> rows = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath))) {
@@ -103,4 +101,5 @@ public class FileReader {
         return combinations;
     }
 }
+
 
